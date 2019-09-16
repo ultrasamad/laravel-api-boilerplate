@@ -22,7 +22,7 @@ class RegisterController extends Controller
 
         $tokenObj = $user->createToken('laravel-api-boilerplate');
         $token = $tokenObj->accessToken;
-        $expiration = Carbon::parse($tokenObj->token->expires_in)->toDateTimeString();
+        $expiration = Carbon::parse($tokenObj->token->expires_at)->toDateTimeString();
         
         return response()->json([
             'access_token' => $token,
