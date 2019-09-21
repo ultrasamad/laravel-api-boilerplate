@@ -2,12 +2,13 @@
 
 namespace App\Models;
 
+use App\Notifications\Auth\API\VerifyEmail;
 use Laravel\Passport\HasApiTokens;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
-class User extends Authenticatable
+class User extends Authenticatable implements MustVerifyEmail
 {
     use HasApiTokens, Notifiable;
 
@@ -37,4 +38,12 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    /**
+     * Custom email verification method for api endpoints
+     */
+    public function sendApiEmailVerificationNotification()
+    {
+        $this->notify(new VerifyEmail);
+    }
 }
