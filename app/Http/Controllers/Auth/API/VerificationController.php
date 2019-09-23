@@ -107,7 +107,7 @@ class VerificationController extends Controller
             ], 401);
         }
 
-        $request->user()->sendApiEmailVerificationNotification();
+        $request->user()->sendEmailVerificationNotification();
         
         return response()->json([
             'message'   => 'Verification email resent successfully!'
