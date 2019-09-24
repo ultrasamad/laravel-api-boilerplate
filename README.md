@@ -6,3 +6,7 @@ A starting point for your next laravel v6.0 api project
 * User account verification via email
 * Forgot & Reset password
 * Laravel horizon for monitoring queue workers
+
+## Additional server software requirements
+* [Redis](https://redis.io/)
+* [Supervisor](http://supervisord.org/index.html)
