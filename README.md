@@ -5,6 +5,7 @@ A starting point for your next laravel v6.0 api project
 * Authentication with Laravel passport
 * User account verification via email
 * Forgot & Reset password
+* Change current password
 * Laravel horizon for monitoring queue workers
 
 ## Additional server software requirements
