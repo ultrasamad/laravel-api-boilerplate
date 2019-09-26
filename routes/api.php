@@ -17,5 +17,6 @@ Route::post('password/reset', 'Auth\API\ResetPasswordController@doReset')->name(
 
 //User routes
 Route::group(['middleware' => 'auth:api'], function () {
+    Route::patch('change-password', 'ChangePasswordController');
     Route::resource('users', 'UserController');
 });
