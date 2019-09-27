@@ -90,13 +90,13 @@ class UserTest extends TestCase
     /**
      * @test
     */
-    public function an_authorized_user_can_delete_a_user()
+    public function an_authorized_user_can_soft_delete_a_user()
     {
         $this->authenticate();
         $user = factory(User::class)->create();
         $response = $this->json('DELETE', route('users.destroy', $user));
         $response->assertStatus(204);
-        $this->assertDatabaseMissing('users', [
+        $this->assertSoftDeleted('users', [
             'name'  => $user->name,
         ]);
     }

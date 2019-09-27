@@ -8,10 +8,11 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use App\Notifications\Auth\API\ResetPassword;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
-    use HasApiTokens, Notifiable;
+    use HasApiTokens, Notifiable, SoftDeletes;
 
     /**
      * The attributes that are mass assignable.
