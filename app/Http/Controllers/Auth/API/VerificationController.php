@@ -89,7 +89,7 @@ class VerificationController extends Controller
 
         return response()->json([
             'message' => 'User email address verified successfully!'
-        ], 401);
+        ], 200);
     }
 
     /**
