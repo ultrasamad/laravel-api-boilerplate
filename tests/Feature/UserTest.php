@@ -100,4 +100,40 @@ class UserTest extends TestCase
             'name'  => $user->name,
         ]);
     }
+
+    /**
+     * @test
+    */
+    public function a_name_is_required_to_create_a_new_user()
+    {
+        $this->authenticate();
+        $input = [
+            'email' => $this->faker->email,
+            'password'  => 'supersecret',
+            'password_confirmation' => 'supersecret'
+        ];
+        $response = $this->json('POST', route('users.store'), $input);
+        $response->assertStatus(422);
+        $response->assertJsonValidationErrors([
+            'name'  => 'The name field is required.'
+        ]);
+    }
+
+    /**
+     * @test
+    */
+    public function an_email_is_required_to_create_a_new_user()
+    {
+        $this->authenticate();
+        $input = [
+            'name' => $this->faker->name,
+            'password'  => 'supersecret',
+            'password_confirmation' => 'supersecret'
+        ];
+        $response = $this->json('POST', route('users.store'), $input);
+        $response->assertStatus(422);
+        $response->assertJsonValidationErrors([
+            'email'  => 'The email field is required.'
+        ]);
+    }
 }
