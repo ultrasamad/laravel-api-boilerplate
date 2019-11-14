@@ -19,7 +19,10 @@ class UserTest extends TestCase
         factory(User::class, 2)->create();
         $response = $this->json('GET', route('users.index'));
         $response->assertOk();
-        $response->assertJsonCount(3, 'users'); // 3 => 2 + the authenticated user which is created in TestCase.
+        $response->assertJsonStructure([
+            'data', 'pagination'
+        ]);
+        $response->assertJsonCount(3, 'data'); // 3 => 2 + the authenticated user which is created in TestCase.
     }
 
     /**
@@ -32,7 +35,7 @@ class UserTest extends TestCase
         $response = $this->json('GET', route('users.show', $user));
         $response->assertOk();
         $response->assertJson([
-            'user'  => [
+            'data'  => [
                 'name'  => $user->name,
                 'email' => $user->email,
             ]
@@ -56,9 +59,9 @@ class UserTest extends TestCase
         $this->assertDatabaseHas('users', [
             'name'  => $input['name'],
         ]);
-        $response->assertOk();
+        $response->assertStatus(201);
         $response->assertJson([
-            'user'  => [
+            'data'  => [
                 'name'  => $input['name']
             ],
         ]);
@@ -81,7 +84,7 @@ class UserTest extends TestCase
         ]);
         $response->assertOk();
         $response->assertJson([
-            'user'  => [
+            'data'  => [
                 'name'  => $input['name']
             ],
         ]);

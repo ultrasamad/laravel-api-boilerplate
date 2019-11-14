@@ -7,7 +7,8 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Requests\RegisterUserRequest;
 use App\Http\Requests\UpdateUserRequest;
-
+use App\Http\Resources\UserCollection;
+use App\Http\Resources\UserResource;
 
 class UserController extends Controller
 {
@@ -17,18 +18,13 @@ class UserController extends Controller
     }
     public function index()
     {
-        $users = User::get();
-        return response()->json([
-            'message'   => 'User registered successfully!',
-            'users' => $users
-        ]);
+        $users = User::paginate();
+        return new UserCollection($users);
     }
 
     public function show(Request $request, User $user)
     {
-        return response()->json([
-            'user'  => $user,
-        ]);
+        return new UserResource($user);
     }
 
     public function store(RegisterUserRequest $request)
@@ -38,18 +34,13 @@ class UserController extends Controller
 
         $user = User::create($input);
 
-        return response()->json([
-            'user'   => $user
-        ]);
+        return new UserResource($user);
     }
 
     public function update(UpdateUserRequest $request, User $user)
     {
         $user->update($request->except('password'));
-        return response()->json([
-            'message'   => 'User information updated successfully!',
-            'user'  => $user,
-        ]);
+        return new UserResource($user->fresh());
     }
 
     public function destroy(Request $request, User $user)

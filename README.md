@@ -12,6 +12,3 @@ A starting point for your next laravel v6.0 api project
 ## Additional server software requirements
 * [Redis](https://redis.io/)
 * [Supervisor](http://supervisord.org/index.html)
-
-## TODO
-* File upload trait
