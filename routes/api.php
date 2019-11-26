@@ -2,8 +2,8 @@
 
 //Auth routes
 Route::prefix('auth')->group(function(){
-    Route::post('login', 'Auth\API\LoginController');
-    Route::post('register', 'Auth\API\RegisterController');
+    Route::post('login', 'Auth\API\LoginController')->name('auth.login');
+    Route::post('register', 'Auth\API\RegisterController')->name('auth.register');
     Route::middleware('auth:api')->get('/user', 'Auth\API\UserProfileController');
 });
 

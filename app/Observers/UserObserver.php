@@ -25,8 +25,7 @@ class UserObserver
      */
     public function updated(User $user)
     {
-        info('Updating user');
-        info($user);
+        //
     }
 
     /**
