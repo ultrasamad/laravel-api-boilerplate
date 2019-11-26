@@ -7,7 +7,7 @@ A starting point for your next laravel v6.0 api project
 * Forgot & Reset password
 * Change current password
 * Laravel horizon for monitoring queue workers
-* Testing
+* Unit Testing
 
 ## Additional server software requirements
 * [Redis](https://redis.io/)
