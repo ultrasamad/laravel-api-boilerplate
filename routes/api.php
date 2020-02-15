@@ -4,6 +4,7 @@
 Route::prefix('auth')->group(function(){
     Route::post('login', 'Auth\API\LoginController')->name('auth.login');
     Route::post('register', 'Auth\API\RegisterController')->name('auth.register');
+    Route::get('logout', 'Auth\API\LogoutController@logout')->name('auth.logout');
     Route::middleware('auth:api')->get('/user', 'Auth\API\UserProfileController');
 });
 
