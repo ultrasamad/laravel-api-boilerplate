@@ -9,6 +9,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class LogoutUserTest extends TestCase
 {
+    use WithFaker, RefreshDatabase;
     /**
      *@test
      */
