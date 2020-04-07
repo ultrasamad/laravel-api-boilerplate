@@ -65,6 +65,7 @@ return [
     |
     */
 
+    //Add auth:web if your default auth guard is not web. 
     'middleware' => ['web'],
 
     /*

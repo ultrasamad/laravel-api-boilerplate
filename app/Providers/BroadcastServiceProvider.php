@@ -14,7 +14,11 @@ class BroadcastServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        Broadcast::routes();
+        //Remove the custom route attributes, if your default auth guard is web
+        Broadcast::routes([
+            'prefix' => 'api',
+            'middleware' => ['auth:api', 'cors']
+        ]);
 
         require base_path('routes/channels.php');
     }
