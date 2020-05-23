@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Auth\API;
+namespace App\Http\Controllers\API\Auth;
 
 use Hash;
 use App\Models\User;

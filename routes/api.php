@@ -4,22 +4,22 @@ use Illuminate\Support\Facades\Route;
 
 //Auth routes
 Route::prefix('auth')->group(function(){
-    Route::post('login', 'Auth\API\LoginController')->name('auth.login');
-    Route::post('register', 'Auth\API\RegisterController')->name('auth.register');
-    Route::get('logout', 'Auth\API\LogoutController@logout')->name('auth.logout');
-    Route::middleware('auth:api')->get('/user', 'Auth\API\UserProfileController');
+    Route::post('login', 'API\Auth\LoginController')->name('auth.login');
+    Route::post('register', 'API\Auth\RegisterController')->name('auth.register');
+    Route::get('logout', 'API\Auth\LogoutController@logout')->name('auth.logout');
+    Route::middleware('auth:api')->get('user', 'API\UserProfileController');
 });
 
 //Email verification
-Route::get('email-verification/resend', 'Auth\API\VerificationController@resend')->name('verification.resend');
-Route::get('email-verification/verify/{id}', 'Auth\API\VerificationController@verify')->name('api.verification.verify');
+Route::get('email-verification/resend', 'API\Auth\VerificationController@resend')->name('verification.resend');
+Route::get('email-verification/verify/{id}', 'API\Auth\VerificationController@verify')->name('api.verification.verify');
 
 //Password reset
-Route::get('password/email', 'Auth\API\ForgotPasswordController@sendLink');
-Route::post('password/reset', 'Auth\API\ResetPasswordController@doReset')->name('api.password.reset');
+Route::get('password/email', 'API\Auth\ForgotPasswordController@sendLink');
+Route::post('password/reset', 'API\Auth\ResetPasswordController@doReset')->name('api.password.reset');
 
 //User routes
 Route::group(['middleware' => 'auth:api'], function () {
-    Route::patch('change-password', 'ChangePasswordController');
-    Route::apiResource('users', 'UserController');
+    Route::patch('change-password', 'API\ChangePasswordController');
+    Route::apiResource('users', 'API\UserController');
 });

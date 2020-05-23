@@ -1,9 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\API;
 
-use App\Rules\ValidCurrentUserPassword;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\Rules\ValidCurrentUserPassword;
+
 
 class ChangePasswordController extends Controller
 {

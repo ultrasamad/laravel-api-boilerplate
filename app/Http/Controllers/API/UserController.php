@@ -1,14 +1,15 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\API;
 
-use Hash;
 use App\Models\User;
 use Illuminate\Http\Request;
-use App\Http\Requests\RegisterUserRequest;
-use App\Http\Requests\UpdateUserRequest;
-use App\Http\Resources\UserCollection;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Hash;
 use App\Http\Resources\UserResource;
+use App\Http\Resources\UserCollection;
+use App\Http\Requests\UpdateUserRequest;
+use App\Http\Requests\RegisterUserRequest;
 
 class UserController extends Controller
 {
