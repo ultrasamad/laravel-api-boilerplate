@@ -20,5 +20,6 @@ class LogoutUserTest extends TestCase
 
         $response = $this->getJson(route('auth.logout'));
         $response->assertOk();
+        $response->dump();
     }
 }
