@@ -3,9 +3,8 @@
 @section('content')
 <div class="main-content">
     <div class="container-fluid" id="login">
-        <h3>User Login</h3>
+        <h3 class="text-center">User Login</h3>
         <h4>
-            Login to get Access token. <br><br>
             Endpoint: <code>/api/auth/login</code>
         </h4>
         <div class="row">
@@ -90,8 +89,8 @@
     </div>
     <hr>
     {{-- Registration --}}
-    <div class="container-fluid"" id="register">
-        <h3>Registration</h3>
+    <div class="container-fluid" id="register">
+        <h3 class="text-center">Registration</h3>
         <h4>
             Endpoint: <code>/api/auth/register</code>
         </h4>
@@ -186,8 +185,8 @@
     
     <hr>
     {{-- Logout --}}
-    <div class="container-fluid"" id="logout">
-        <h3>Logout</h3>
+    <div class="container-fluid" id="logout">
+        <h3 class="text-center">Logout</h3>
         <h4>
             Endpoint: <code>/api/auth/logout</code>
         </h4>

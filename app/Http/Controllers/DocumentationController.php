@@ -16,7 +16,7 @@ class DocumentationController extends Controller
                 'children' => [
                     ['method' => 'POST', 'title' => 'Login', 'page' => 'login'],
                     ['method' => 'POST', 'title' => 'Register', 'page' => 'register'],
-                    ['method' => 'POST', 'title' => 'Logout', 'page' => 'logout'],
+                    ['method' => 'GET', 'title' => 'Logout', 'page' => 'logout'],
                 ]
             ],
         ];

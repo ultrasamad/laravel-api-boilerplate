@@ -14,7 +14,7 @@
                         <ul class="nav">
                             @foreach ($menu['children'] as $child)
                                 <li>
-                                    <a href="#{{ $child['page'] }}" class="">
+                                    <a href="?page={{ $menu['page'] }}#{{ $child['page'] }}" class="">
                                         {{ $child['title'] }} &nbsp; 
                                         @switch($child['method'])
                                             @case('POST')
