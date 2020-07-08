@@ -12,3 +12,6 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('api/docs', 'DocumentationController')->name('docs.pages');
+
+
+Route::view('dashboard', 'dashboard');
