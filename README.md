@@ -1,11 +1,12 @@
-# laravel-api-boilerplate
-A starting point for your next laravel v6.0 api project
+# laravel-boilerplate
+A starting point for your next laravel v7 project
 
 ## Features
-* Authentication with Laravel passport
-* User account verification via email
-* Forgot & Reset password
-* Change current password
+* API authentication with Laravel passport alongside web authentication
+* Vuetifyjs integration
+* Admin dashboard
+* SMS integration with Twillo
+* Access control with roles, permissions and policies
 * Laravel horizon for monitoring queue workers
 * Unit Testing
 
