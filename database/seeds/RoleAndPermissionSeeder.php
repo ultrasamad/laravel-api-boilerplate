@@ -44,10 +44,14 @@ class RoleAndPermissionSeeder extends Seeder
             [
                 'name' => 'Force delete user',
                 'guards' => ['web', 'api']
+            ],
+            [
+                'name' => 'Update user roles',
+                'guards' => ['web', 'api']
             ]
         ];
 
-        //Create roles
+        //Create roles for both web and api guards
         foreach ($roles as $role) {
             foreach ($role['guards'] as $guard) {
                 Role::firstOrCreate([
@@ -57,7 +61,7 @@ class RoleAndPermissionSeeder extends Seeder
             }
         }
 
-        //Create permissions
+        //Create permissions for both web and api guards
         foreach ($permissions as $permission) {
             foreach ($permission['guards'] as $guard) {
                 Permission::firstOrCreate([

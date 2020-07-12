@@ -23,3 +23,11 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::patch('change-password', 'API\ChangePasswordController');
     Route::apiResource('users', 'API\UserController');
 });
+
+//Roles and Permissions
+Route::get('roles', 'RoleController@index')->name('roles.index');
+Route::get('permissions', 'PermissionController@index')->name('permissions.index');
+//Update roles of a user
+Route::patch('user/{user}/roles', 'UserRoleController@update')->name('user.roles.update');
+//Assign permissions to a user
+Route::patch('user/{user}/permissions', 'UserPermissionController@update')->name('user.permissions.update');

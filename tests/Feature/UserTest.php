@@ -46,6 +46,9 @@ class UserTest extends TestCase
         $user = factory(User::class)->create();
         $response = $this->json('GET', route('users.show', $user));
         $response->assertOk();
+        $response->assertJsonStructure([
+            'data' => ['id', 'name', 'email', 'permissions', 'roles']
+        ]);
         $response->assertJson([
             'data'  => [
                 'name'  => $user->name,

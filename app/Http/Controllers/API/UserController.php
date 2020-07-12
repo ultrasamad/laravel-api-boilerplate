@@ -33,7 +33,7 @@ class UserController extends Controller
      */
     public function show(Request $request, User $user)
     {
-        return new UserResource($user);
+        return new UserResource($user->load(['roles', 'permissions']));
     }
 
     /**
