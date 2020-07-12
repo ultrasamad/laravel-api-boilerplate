@@ -30,6 +30,7 @@ class UserController extends Controller
 
     public function store(RegisterUserRequest $request)
     {
+        $this->authorize('create', User::class);
         $input = $request->only('name', 'email', 'password');
         $input['password'] = Hash::make($request->input('password'));
 
@@ -40,14 +41,21 @@ class UserController extends Controller
 
     public function update(UpdateUserRequest $request, User $user)
     {
+        $this->authorize('update', $user);
         $user->update($request->except('password'));
         return new UserResource($user->fresh());
     }
 
     public function destroy(Request $request, User $user)
     {
-        $user->delete();
-
+        if ($request->input('permanent') == true) {
+            $this->authorize('Force delete user', $user);
+            $user->forceDelete();
+        }else {
+            $this->authorize('delete', $user);
+            $user->delete();
+        }
+       
         return response()->json([
             'message'   => 'User removed successfully!'
         ], 204);

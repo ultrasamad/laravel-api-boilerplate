@@ -16,6 +16,6 @@ abstract class TestCase extends BaseTestCase
     {
         $user = $user ?? factory('App\Models\User')->create();
         Passport::actingAs($user);
-        return $this;
+        return $user;
     }
 }

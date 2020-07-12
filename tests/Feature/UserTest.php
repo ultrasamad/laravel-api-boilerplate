@@ -6,16 +6,28 @@ use App\Models\User;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Spatie\Permission\Models\Permission;
 
 class UserTest extends TestCase
 {
     use RefreshDatabase, WithFaker;
+
+    /**
+     * Setup
+     *
+     * @return void
+     */
+    public function setUp():void
+    {
+        parent::setUp();
+        $this->seed('RoleAndPermissionSeeder');
+    }
     /**
      * @test
      */
     public function an_authenticated_user_can_list_all_users()
     {
-        $this->authenticate();
+        $admin = $this->authenticate();
         factory(User::class, 2)->create();
         $response = $this->json('GET', route('users.index'));
         $response->assertOk();
@@ -47,7 +59,9 @@ class UserTest extends TestCase
     */
     public function an_authorized_user_can_create_a_new_user()
     {
-        $this->authenticate();
+        $admin = $this->authenticate();
+        $createPermissions = Permission::whereName('Create user')->get();
+        $admin->givePermissionTo($createPermissions);
         $input = [
             'name'  => $this->faker->name,
             'email' => $this->faker->email,
@@ -72,7 +86,10 @@ class UserTest extends TestCase
     */
     public function an_authorized_user_can_update_a_user_details()
     {
-        $this->authenticate();
+        $admin = $this->authenticate();
+        $updatePermissions = Permission::whereName('Update user')->get();
+        $admin->givePermissionTo($updatePermissions);
+
         $user = factory(User::class)->create();
         $input = [
             'name'  => 'Mr Nobody',
@@ -95,11 +112,36 @@ class UserTest extends TestCase
     */
     public function an_authorized_user_can_soft_delete_a_user()
     {
-        $this->authenticate();
+        $admin = $this->authenticate();
+        $deletePermissions = Permission::whereName('Delete user')->get();
+        $admin->givePermissionTo($deletePermissions);
+
         $user = factory(User::class)->create();
         $response = $this->json('DELETE', route('users.destroy', $user));
         $response->assertStatus(204);
         $this->assertSoftDeleted('users', [
+            'name'  => $user->name,
+        ]);
+    }
+
+    /**
+     * @test
+     *
+     * @return void
+     */
+    public function an_authorized_user_can_force_delte_a_user()
+    {
+        $admin = $this->authenticate();
+        $deletePermissions = Permission::whereName('Force delete user')->get();
+        $admin->givePermissionTo($deletePermissions);
+
+        $user = factory(User::class)->create();
+        $input = [
+            'permanent' => true,
+        ];
+        $response = $this->json('DELETE', route('users.destroy', $user), $input);
+        $response->assertStatus(204);
+        $this->assertDatabaseMissing('users', [
             'name'  => $user->name,
         ]);
     }
