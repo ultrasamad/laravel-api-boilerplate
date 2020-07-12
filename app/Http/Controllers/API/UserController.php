@@ -13,21 +13,35 @@ use App\Http\Requests\RegisterUserRequest;
 
 class UserController extends Controller
 {
-    public function __construct()
-    {
-        //
-    }
+    /**
+     * List all users
+     *
+     * @return void
+     */
     public function index()
     {
         $users = User::paginate();
         return new UserCollection($users);
     }
 
+    /**
+     * Display user details
+     *
+     * @param Request $request
+     * @param User $user
+     * @return void
+     */
     public function show(Request $request, User $user)
     {
         return new UserResource($user);
     }
 
+    /**
+     * Create new user
+     *
+     * @param RegisterUserRequest $request
+     * @return void
+     */
     public function store(RegisterUserRequest $request)
     {
         $this->authorize('create', User::class);
@@ -39,6 +53,13 @@ class UserController extends Controller
         return new UserResource($user);
     }
 
+    /**
+     * Update user
+     *
+     * @param UpdateUserRequest $request
+     * @param User $user
+     * @return void
+     */
     public function update(UpdateUserRequest $request, User $user)
     {
         $this->authorize('update', $user);
@@ -46,10 +67,17 @@ class UserController extends Controller
         return new UserResource($user->fresh());
     }
 
+    /**
+     * Remove user
+     *
+     * @param Request $request
+     * @param User $user
+     * @return void
+     */
     public function destroy(Request $request, User $user)
     {
         if ($request->input('permanent') == true) {
-            $this->authorize('Force delete user', $user);
+            $this->authorize('forceDelete', $user);
             $user->forceDelete();
         }else {
             $this->authorize('delete', $user);

@@ -95,6 +95,6 @@ class UserPolicy
      */
     public function forceDelete(User $admin, User $user)
     {
-        return $user->can('Force delte user');
+        return $admin->can('Force delete user');
     }
 }
