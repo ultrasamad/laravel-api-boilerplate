@@ -1,4 +1,7 @@
-# laravel-boilerplate
+# Laravel boilerplate
+
+![](https://github.com/ultrasamad/laravel-boilerplate/workflows/Run%20Tests/badge.svg?branch=master)
+
 A starting point for your next laravel v7 project
 
 ## Features
