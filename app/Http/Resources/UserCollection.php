@@ -2,8 +2,12 @@
 
 namespace App\Http\Resources;
 
+use App\Http\Resources\Simple\UserResource;
 use Illuminate\Http\Resources\Json\ResourceCollection;
 
+/**
+ * @author Ibrahim Samad <naatogma@gmail.com>
+ */
 class UserCollection extends ResourceCollection
 {
     /**
@@ -16,13 +20,6 @@ class UserCollection extends ResourceCollection
     {
         return [
             'data' => UserResource::collection($this->collection),
-            'pagination' => [
-                'total' => $this->total(),
-                'count' => $this->count(),
-                'per_page' => $this->perPage(),
-                'current_page' => $this->currentPage(),
-                'total_pages' => $this->lastPage()
-            ],
         ];
     }
 }

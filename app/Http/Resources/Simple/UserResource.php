@@ -1,10 +1,13 @@
 <?php
 
-namespace App\Http\Resources;
+namespace App\Http\Resources\Simple;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class RoleResource extends JsonResource
+/**
+ * @author Ibrahim Samad <naatogma@gmail.com>
+ */
+class UserResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -17,6 +20,6 @@ class RoleResource extends JsonResource
         return [
             'id' => $this->id,
             'name' => $this->name,
-        ];;
+        ];
     }
 }

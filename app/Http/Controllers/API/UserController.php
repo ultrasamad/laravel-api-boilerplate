@@ -6,17 +6,20 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
-use App\Http\Resources\UserResource;
 use App\Http\Resources\UserCollection;
 use App\Http\Requests\UpdateUserRequest;
 use App\Http\Requests\RegisterUserRequest;
+use App\Http\Resources\Detail\UserResource;
 
+/**
+ * @author Ibrahim Samad <naatogma@gmail.com>
+ */
 class UserController extends Controller
 {
     /**
      * List all users
      *
-     * @return void
+     * @return UserCollection
      */
     public function index()
     {
@@ -29,7 +32,7 @@ class UserController extends Controller
      *
      * @param Request $request
      * @param User $user
-     * @return void
+     * @return UserResource
      */
     public function show(Request $request, User $user)
     {
@@ -40,17 +43,21 @@ class UserController extends Controller
      * Create new user
      *
      * @param RegisterUserRequest $request
-     * @return void
+     * @return \Illuminate\Http\Response
      */
     public function store(RegisterUserRequest $request)
     {
         $this->authorize('create', User::class);
         $input = $request->only('name', 'email', 'password');
         $input['password'] = Hash::make($request->input('password'));
+        User::create($input);
 
-        $user = User::create($input);
-
-        return new UserResource($user);
+        return response()->json([
+            'data' => [
+                'error' => false,
+                'message' => 'User created successfully',
+            ]
+        ]);
     }
 
     /**
@@ -58,7 +65,7 @@ class UserController extends Controller
      *
      * @param UpdateUserRequest $request
      * @param User $user
-     * @return void
+     * @return UserResource
      */
     public function update(UpdateUserRequest $request, User $user)
     {
@@ -72,7 +79,7 @@ class UserController extends Controller
      *
      * @param Request $request
      * @param User $user
-     * @return void
+     * @return \Illuminate\Http\Response
      */
     public function destroy(Request $request, User $user)
     {
@@ -83,9 +90,6 @@ class UserController extends Controller
             $this->authorize('delete', $user);
             $user->delete();
         }
-       
-        return response()->json([
-            'message'   => 'User removed successfully!'
-        ], 204);
+        return response()->noContent(204);
     }
 }

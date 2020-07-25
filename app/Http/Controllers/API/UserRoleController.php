@@ -1,11 +1,15 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\API;
 
 use App\Models\User;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
+use App\Http\Controllers\Controller;
 
+/**
+ * @author Ibrahim Samad <naatogma@gmail.com>
+ */
 class UserRoleController extends Controller
 {
     
@@ -13,7 +17,7 @@ class UserRoleController extends Controller
      * Assign roles to a user
      *
      * @param Request $request
-     * @return void
+     * @return \Illuminate\Http\Response
      */
     public function update(Request $request, User $user)
     {

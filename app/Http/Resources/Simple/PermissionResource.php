@@ -1,9 +1,12 @@
 <?php
 
-namespace App\Http\Resources;
+namespace App\Http\Resources\Simple;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
+/**
+ * @author Ibrahim Samad <naatogma@gmail.com>
+ */
 class PermissionResource extends JsonResource
 {
     /**

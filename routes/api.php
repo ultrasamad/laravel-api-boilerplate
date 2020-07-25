@@ -25,9 +25,9 @@ Route::group(['middleware' => 'auth:api'], function () {
 });
 
 //Roles and Permissions
-Route::get('roles', 'RoleController@index')->name('roles.index');
-Route::get('permissions', 'PermissionController@index')->name('permissions.index');
+Route::get('roles', 'API\RoleController@index')->name('roles.index');
+Route::get('permissions', 'API\PermissionController@index')->name('permissions.index');
 //Update roles of a user
-Route::patch('user/{user}/roles', 'UserRoleController@update')->name('user.roles.update');
+Route::patch('user/{user}/roles', 'API\UserRoleController@update')->name('user.roles.update');
 //Assign permissions to a user
-Route::patch('user/{user}/permissions', 'UserPermissionController@update')->name('user.permissions.update');
+Route::patch('user/{user}/permissions', 'API\UserPermissionController@update')->name('user.permissions.update');

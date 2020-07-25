@@ -2,8 +2,12 @@
 
 namespace App\Http\Resources;
 
+use App\Http\Resources\Simple\PermissionResource;
 use Illuminate\Http\Resources\Json\ResourceCollection;
 
+/**
+ * @author Ibrahim Samad <naatogma@gmail.com>
+ */
 class PermissionCollection extends ResourceCollection
 {
     /**

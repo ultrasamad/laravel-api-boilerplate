@@ -1,16 +1,20 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\API;
 
 use Spatie\Permission\Models\Role;
+use App\Http\Controllers\Controller;
 use App\Http\Resources\RoleCollection;
 
+/**
+ * @author Ibrahim Samad <naatogma@gmail.com>
+ */
 class RoleController extends Controller
 {   
     /**
      * List roles
      *
-     * @return void
+     * @return RoleCollection
      */
     public function index()
     {

@@ -4,10 +4,13 @@ namespace Tests\Feature;
 
 use App\Models\User;
 use Tests\TestCase;
+use Spatie\Permission\Models\Permission;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Spatie\Permission\Models\Permission;
 
+/**
+ * @author Ibrahim Samad <naatogma@gmail.com>
+ */
 class UserTest extends TestCase
 {
     use RefreshDatabase, WithFaker;
@@ -31,9 +34,6 @@ class UserTest extends TestCase
         factory(User::class, 2)->create();
         $response = $this->json('GET', route('users.index'));
         $response->assertOk();
-        $response->assertJsonStructure([
-            'data', 'pagination'
-        ]);
         $response->assertJsonCount(3, 'data'); // 3 => 2 + the authenticated user which is created in TestCase.
     }
 
@@ -76,11 +76,10 @@ class UserTest extends TestCase
         $this->assertDatabaseHas('users', [
             'name'  => $input['name'],
         ]);
-        $response->assertStatus(201);
-        $response->assertJson([
-            'data'  => [
-                'name'  => $input['name']
-            ],
+        $response->assertOk();
+        $response->assertJsonFragment([
+            'error' => false,
+            'message' => 'User created successfully',
         ]);
     }
 

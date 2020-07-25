@@ -1,10 +1,13 @@
 <?php
 
-namespace App\Http\Resources;
+namespace App\Http\Resources\Detail;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class UserResource extends JsonResource
+/**
+ * @author Ibrahim Samad <naatogma@gmail.com>
+ */
+class PermissionResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -17,9 +20,6 @@ class UserResource extends JsonResource
         return [
             'id' => $this->id,
             'name' => $this->name,
-            'email' => $this->email,
-            'permissions' => PermissionResource::collection($this->whenLoaded('permissions')),
-            'roles' => RoleResource::collection($this->whenLoaded('roles'))
         ];
     }
 }
