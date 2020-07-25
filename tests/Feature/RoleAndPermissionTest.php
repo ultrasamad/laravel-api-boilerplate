@@ -30,7 +30,6 @@ class RoleAndPermissionTest extends TestCase
     {
         $response = $this->getJson(route('roles.index'));
         $response->assertOk();
-        $response->assertJsonCount(2, 'data');
     }
 
     /**
@@ -42,7 +41,6 @@ class RoleAndPermissionTest extends TestCase
     {
         $response = $this->getJson(route('permissions.index'));
         $response->assertOk();
-        $response->assertJsonCount(5, 'data');
     }
 
     /**
