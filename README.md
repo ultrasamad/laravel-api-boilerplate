@@ -2,7 +2,7 @@
 
 ![](https://github.com/ultrasamad/laravel-boilerplate/workflows/Run%20Tests/badge.svg?branch=master)
 
-A starting point for your next laravel v7 project
+A starting point for your next laravel v8 project
 
 ## Features
 * API authentication with Laravel passport alongside web authentication
