@@ -2,6 +2,7 @@
 
 namespace Tests;
 
+use App\Models\User;
 use Laravel\Passport\Passport;
 use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
 
@@ -14,7 +15,7 @@ abstract class TestCase extends BaseTestCase
     */
     public function authenticate($user = null)
     {
-        $user = $user ?? factory('App\Models\User')->create();
+        $user = $user ?? User::factory()->create();
         Passport::actingAs($user);
         return $user;
     }

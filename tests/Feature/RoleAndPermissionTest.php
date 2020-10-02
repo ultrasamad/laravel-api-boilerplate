@@ -3,6 +3,7 @@
 namespace Tests\Feature;
 
 use Tests\TestCase;
+use App\Models\User;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
@@ -52,7 +53,7 @@ class RoleAndPermissionTest extends TestCase
     {
         $this->admin->givePermissionTo('Update user roles');
         
-        $user = factory('App\Models\User')->create();
+        $user = User::factory()->create();
         //Assert user has no admin role yet
         $this->assertFalse($user->hasRole('Admin'));
         $input = [
@@ -78,7 +79,7 @@ class RoleAndPermissionTest extends TestCase
     {
         $this->admin->givePermissionTo('Update user roles');
 
-        $user = factory('App\Models\User')->create();
+        $user = User::factory()->create();
         //Assert user has no admin role yet
         $this->assertFalse($user->hasPermissionTo('Create user', 'api'));
         $input = [

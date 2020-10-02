@@ -31,7 +31,7 @@ class UserTest extends TestCase
     public function an_authenticated_user_can_list_all_users()
     {
         $admin = $this->authenticate();
-        factory(User::class, 2)->create();
+        User::factory()->times(2)->create();
         $response = $this->json('GET', route('users.index'));
         $response->assertOk();
         $response->assertJsonCount(3, 'data'); // 3 => 2 + the authenticated user which is created in TestCase.
@@ -43,7 +43,7 @@ class UserTest extends TestCase
     public function an_authenticated_user_can_show_details_of_a_specific_user()
     {
         $this->authenticate();
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
         $response = $this->json('GET', route('users.show', $user));
         $response->assertOk();
         $response->assertJsonStructure([
@@ -92,7 +92,7 @@ class UserTest extends TestCase
         $updatePermissions = Permission::whereName('Update user')->get();
         $admin->givePermissionTo($updatePermissions);
 
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
         $input = [
             'name'  => 'Mr Nobody',
         ];
@@ -118,7 +118,7 @@ class UserTest extends TestCase
         $deletePermissions = Permission::whereName('Delete user')->get();
         $admin->givePermissionTo($deletePermissions);
 
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
         $response = $this->json('DELETE', route('users.destroy', $user));
         $response->assertStatus(204);
         $this->assertSoftDeleted('users', [
@@ -137,7 +137,7 @@ class UserTest extends TestCase
         $deletePermissions = Permission::whereName('Force delete user')->get();
         $admin->givePermissionTo($deletePermissions);
 
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
         $input = [
             'permanent' => true,
         ];

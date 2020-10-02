@@ -7,7 +7,13 @@ use Illuminate\Http\Request;
 
 class LogoutController extends Controller
 {
-    public function logout(Request $request)
+    /**
+     * Log user out
+     *
+     * @param Request $request
+     * @return void
+     */
+    public function __invoke(Request $request)
     {
         $request->user()->token()->revoke();
 
